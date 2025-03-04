@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -133,10 +134,131 @@
         .container {
             animation: glow 3s infinite;
         }
-        
-        
-        
-        
+
+        .header-links {
+            display: flex;
+            justify-content: center;
+            margin: -20px 0 30px 0;
+        }
+
+        .telegram-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #9370DB, #8A2BE2);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(147, 112, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .telegram-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(147, 112, 219, 0.6);
+        }
+
+        .telegram-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .telegram-link span {
+            font-size: 1.1em;
+        }
+
+        @keyframes highlight {
+            0% { box-shadow: 0 0 15px rgba(147, 112, 219, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(147, 112, 219, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(147, 112, 219, 0.4); }
+        }
+
+        .telegram-link {
+            animation: highlight 2s infinite;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(147, 112, 219, 0.5),
+                        inset 0 0 20px rgba(147, 112, 219, 0.3);
+            animation: modalSlide 0.5s ease;
+            z-index: 1001;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .channel-button {
+            background: linear-gradient(45deg, #9370DB, #8A2BE2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(147, 112, 219, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .channel-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(147, 112, 219, 0.5);
+        }
+
+        .modal-title {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -151,134 +273,30 @@
                 padding: 12px 20px;
                 font-size: 1em;
             }
+            .telegram-link {
+                padding: 8px 16px;
+            }
+            .telegram-link svg {
+                width: 20px;
+                height: 20px;
+            }
+            .telegram-link span {
+                font-size: 1em;
+            }
         }
-        <!--
-        
-        кнопка
-            .telegram-button {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #9370DB, #8A2BE2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        box-shadow: 0 0 20px rgba(147, 112, 219, 0.4);
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    .telegram-button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 30px rgba(147, 112, 219, 0.6);
-    }
-
-    .telegram-button svg {
-        color: white;
-        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-    }
-
-    .telegram-button {
-        animation: float 3s ease-in-out infinite;
-    }
-
-
--->
-
-   .header-links {
-        display: flex;
-        justify-content: center;
-        margin: -20px 0 30px 0;
-    }
-
-    .telegram-link {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 20px;
-        background: linear-gradient(45deg, #9370DB, #8A2BE2);
-        border-radius: 25px;
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        box-shadow: 0 0 15px rgba(147, 112, 219, 0.4);
-        transition: all 0.3s ease;
-    }
-
-    .telegram-link:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0 25px rgba(147, 112, 219, 0.6);
-    }
-
-    .telegram-link svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .telegram-link span {
-        font-size: 1.1em;
-    }
-
-    @keyframes highlight {
-        0% { box-shadow: 0 0 15px rgba(147, 112, 219, 0.4); }
-        50% { box-shadow: 0 0 25px rgba(147, 112, 219, 0.8); }
-        100% { box-shadow: 0 0 15px rgba(147, 112, 219, 0.4); }
-    }
-
-    .telegram-link {
-        animation: highlight 2s infinite;
-    }
-
-    @media (max-width: 768px) {
-        .telegram-link {
-            padding: 8px 16px;
-        }
-        .telegram-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        .telegram-link span {
-            font-size: 1em;
-        }
-    }
-
-
-    @media (max-width: 768px) {
-        .telegram-button {
-            width: 50px;
-            height: 50px;
-            bottom: 20px;
-            right: 20px;
-        }
-        
-        .telegram-button svg {
-            width: 20px;
-            height: 20px;
-        }
-    }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Генератор сайтов</h1>
         <div class="header-links">
-        <a href="https://t.me/m5stick_loni2" class="telegram-link" target="_blank">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
-            </svg>
-            <span>Наш Telegram канал</span>
-        </a>
-    </div>
+            <a href="#" class="telegram-link">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
+                </svg>
+                <span>Telegram</span>
+            </a>
+        </div>
         <div class="input-group">
             <label for="imageInput">Выберите изображение:</label>
             <input type="file" id="imageInput" accept="image/*">
@@ -296,12 +314,13 @@
         </div>
 
         <button onclick="generateHTML()">Создать сайт</button>
-<!--<a href="https://t.me/m5stick_loni2" class="telegram-button" target="_blank">
-    <svg viewBox="0 0 24 24" width="24" height="24">
-        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
-    </svg>
-</a>
-        -->
+    </div>
+
+    <div class="modal-overlay" id="channelsModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Наши Telegram каналы</h2>
+            <div class="channels-grid"></div>
+        </div>
     </div>
 
     <script>
@@ -327,6 +346,45 @@
             reader.readAsDataURL(file);
         });
 
+        const modal = document.querySelector('.modal-overlay');
+        const channelsGrid = document.querySelector('.channels-grid');
+
+        
+        const channels = [
+            'https://t.me/m5stick_loni2',
+            'https://t.me/+QFjtYcgb7J9jYTJi'
+        ];
+
+        function createChannelButtons() {
+    channelsGrid.innerHTML = channels.map(channel => {
+        let channelName = channel.replace('https://t.me/', '');
+        if (channelName === "+QFjtYcgb7J9jYTJi") {
+            channelName = "Палка 2.0";
+        }
+        return `
+            <a href="${channel}" class="channel-button" target="_blank">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
+                </svg>
+                ${channelName}
+            </a>
+        `;
+    }).join('');
+}
+
+        createChannelButtons();
+
+        document.querySelector('.telegram-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
         function generateHTML() {
             const imageData = document.getElementById('imagePreview').src;
             const audioData = document.getElementById('audioPreview').src;
@@ -336,7 +394,7 @@
                 return;
             }
 
-   const htmlContent = `<!DOCTYPE html>
+            const htmlContent = `<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -415,23 +473,149 @@
         .telegram-button {
             animation: float 3s ease-in-out infinite;
         }
+
+        /* Стили для модального окна */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(147, 112, 219, 0.5),
+                        inset 0 0 20px rgba(147, 112, 219, 0.3);
+            animation: modalSlide 0.5s ease;
+            z-index: 1001;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .channel-button {
+            background: linear-gradient(45deg, #9370DB, #8A2BE2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(147, 112, 219, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .channel-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(147, 112, 219, 0.5);
+        }
+
+        .modal-title {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="${imageData}" id="myImage">
         <audio id="myAudio" src="${audioData}"></audio>
-        <a href="https://t.me/m5stick_loni2" class="telegram-button" target="_blank">
+        <a href="#" class="telegram-button" id="showChannels">
             <svg viewBox="0 0 24 24" width="24" height="24">
                 <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
             </svg>
         </a>
     </div>
+
+    <div class="modal-overlay" id="channelsModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Наши Telegram каналы</h2>
+            <div class="channels-grid"></div>
+        </div>
+    </div>
+
     <script>
         const audio = document.getElementById("myAudio");
         const image = document.getElementById("myImage");
+        const modal = document.querySelector('.modal-overlay');
+        const channelsGrid = document.querySelector('.channels-grid');
+        
+        const channels = [
+            'https://t.me/m5stick_loni2',
+            'https://t.me/+QFjtYcgb7J9jYTJi'
+        ];
+        function createChannelButtons() {
+            channelsGrid.innerHTML = channels.map(channel => {
+                let channelName = channel.replace('https://t.me/', '');
+                if (channelName === "+QFjtYcgb7J9jYTJi"){
+                channelName = "Палка 2.0";
+                }
+                return \`
+                    <a href="\${channel}" class="channel-button" target="_blank">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.17 4.83 1.16 4.88 1.15z"/>
+                        </svg>
+                        \${channelName}
+                    </a>
+                \`;
+            }).join('');
+        }
+
+        
+        createChannelButtons();
         image.addEventListener("click", function() {
             audio.play();
+        });
+
+        document.getElementById('showChannels').addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     <\/script>
 </body>
