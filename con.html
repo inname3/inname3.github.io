@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>RADIO SHIFER v2</title>
+<style>
+:root {
+
+    --title-gradient-colors: #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9;
+    --title-animation-duration: 10s;
+    --title-text-color: #ffffff;
+    --title-shadow-color: rgba(255, 255, 255, 0.5);
+    --title-shadow-blur: 80px;
+    --title-font-size: 4em;
+
+    --wireframe-color: rgba(0, 191, 255, 0.8);
+    --wireframe-pulse-min: 0.4;
+    --wireframe-pulse-max: 0.8;
+    --wireframe-pulse-duration: 2s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font: 400 1em/1.5 "Neuton";
+    background: #090d00;
+    color: rgba(255, 255, 255, 0.25);
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.wireframe-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+    overflow: hidden;
+    animation: pulse var(--wireframe-pulse-duration) ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: var(--wireframe-pulse-min); }
+    50% { opacity: var(--wireframe-pulse-max); }
+    100% { opacity: var(--wireframe-pulse-min); }
+}
+
+.main-container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+.title-container {
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    display: inline-block;
+    border-width: 4px 0;
+    padding: 0.5em 0em; 
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: -35px; 
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #80dfff;
+    text-decoration: none;
+    margin-bottom: 50px; 
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: -10px; 
+}
+
+.container {
+    margin-top: -20px; 
+}
+.title {
+    font: 700 var(--title-font-size)/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: 0.25em 0 0.325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 var(--title-shadow-blur) var(--title-shadow-color);
+
+    background: linear-gradient(
+        90deg, 
+        var(--title-gradient-colors)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-animation var(--title-animation-duration) linear infinite;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.subtitle:hover {
+    text-shadow: 0 0 15px #80dfff;
+    letter-spacing: 1.5px;
+}
+
+.subtitle::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #80dfff;
+    transition: all 0.3s ease;
+}
+
+.subtitle:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.container {
+    background: rgba(25, 28, 54, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
+    border: 1px solid rgba(0, 191, 255, 0.1);
+    transform: perspective(1000px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: perspective(1000px) translateY(0px); }
+    50% { transform: perspective(1000px) translateY(-10px); }
+    100% { transform: perspective(1000px) translateY(0px); }
+}
+
+.container:hover {
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.5);
+    transform: perspective(1000px) translateY(-5px);
+}
+
+h2 {
+    font-size: 24px;
+    color: #e0f7ff;
+    margin: 20px 0;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00bfff, transparent);
+    animation: lineGlow 2s ease-in-out infinite;
+}
+
+@keyframes lineGlow {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.signal-box {
+    background: linear-gradient(145deg, #1a2842, #131c2e);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
+    margin: 25px 0;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 136, 204, 0.2);
+    animation: borderPulse 2s infinite;
+}
+
+@keyframes borderPulse {
+    0% { border-color: rgba(0, 136, 204, 0.2); }
+    50% { border-color: rgba(0, 229, 255, 0.6); }
+    100% { border-color: rgba(0, 136, 204, 0.2); }
+}
+
+.waiting-animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    overflow: hidden;
+}
+
+.waiting-text {
+    position: relative;
+    z-index: 2;
+}
+
+.waiting-dots {
+    display: inline-block;
+    width: 40px;
+    text-align: left;
+    animation: typingDots 1.5s infinite steps(1);
+}
+
+@keyframes typingDots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+    100% { content: ''; }
+}
+
+button, select {
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 15px 10px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+button {
+    background: linear-gradient(45deg, #0077ff, #00c3ff);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+    animation: buttonGlow 2s infinite;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+@keyframes buttonGlow {
+    0% { box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(0, 119, 255, 0.7); }
+    100% { box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
+}
+
+select {
+    background: linear-gradient(145deg, #1a2842, #131c2e);
+    color: #00e5ff;
+    padding: 15px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300c3ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 40px;
+    animation: selectGlow 2s infinite;
+}
+
+@keyframes selectGlow {
+    0% { box-shadow: 0 0 15px rgba(0, 136, 204, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(0, 136, 204, 0.6); }
+    100% { box-shadow: 0 0 15px rgba(0, 136, 204, 0.3); }
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,229,255,0.8) 0%, rgba(0,191,255,0.4) 50%, rgba(0,191,255,0) 100%);
+}
+
+.wave {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,229,255,0.2) 0%, rgba(0,191,255,0.1) 50%, rgba(0,191,255,0) 70%);
+}
+
+.data-burst {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #00e5ff;
+    box-shadow: 0 0 8px 2px rgba(0, 229, 255, 0.8);
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    background: rgba(0, 229, 255, 0.15);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.digital-circuit {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.digital-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #00e5ff;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    button, select {
+        padding: 10px 20px;
+        margin: 10px 5px;
+        width: 80%;
+        max-width: 100%;
+    }
+
+    .particle, .wave {
+        transform-origin: center;
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 480px) {
+    .particle, .wave {
+        transform: scale(0.5);
+    }
+}
+</style>
+</head>
+<body>
+   <canvas id="wireframe" class="wireframe-bg"></canvas>
+   <div id="particles" class="particles"></div>
+
+<div class="main-container">
+    <div class="title-container">
+        <span class="title">RADIO SHIFER v2</span>
+    </div>
+    <a href='https://t.me/deautherrr' class='subtitle' target='_blank'>by @deautherrr</a>
+
+    <div class="container">
+        <h2>Принятый сигнал:</h2>
+        <div class="signal-box" id="signal">
+<div class="waiting-animation">
+    <div class="waiting-text">Ожидание сигнала<span class="waiting-dots"></span></div>
+</div>
+        </div>
+        <button onclick="saveSignal()" class="action-button">Сохранить сигнал</button>
+
+        <h2>Сохранённые сигналы:</h2>
+        <select id="fileList">
+        </select><br>
+        <button onclick="sendSignal()" class="action-button">Отправить сигнал</button>
+    </div>
+</div>
+
+<script>
+
+    const wireframeSettings = {
+        numPoints: 40,             
+        connectionDistance: 150,   
+        pointSize: 3,             
+        pointSpeed: 1.8,           
+        pointColor: 'rgba(0, 191, 255, 0.8)',
+        lineColor: 'rgba(0, 191, 255, 0.8)',
+        useQuadTree: true,         
+        maxFPS: 60                 
+    };
+
+    function throttle(callback, limit) {
+        let waiting = false;
+        return function() {
+            if (!waiting) {
+                callback.apply(this, arguments);
+                waiting = true;
+                setTimeout(function() {
+                    waiting = false;
+                }, 1000 / limit);
+            }
+        };
+    }
+
+    function loadFiles() {
+        fetch('/list').then(res => res.text()).then(data => {
+            document.getElementById('fileList').innerHTML = data;
+        });
+    }
+
+    function saveSignal() {
+        createButtonEffect(event, 'save');
+        fetch('/save').then(() => {
+            alert('Сигнал сохранён!');
+            loadFiles();
+        });
+    }
+
+    function sendSignal() {
+        createButtonEffect(event, 'send');
+        let file = document.getElementById('fileList').value;
+        if (file) {
+            fetch('/send?file=' + file);
+        } else {
+            alert('Файл не выбран!');
+        }
+    }
+
+    function setupWireframe() {
+        const canvas = document.getElementById('wireframe');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const points = [];
+        let lastTime = 0;
+        let frameCount = 0;
+        let fps = 0;
+        let lastFpsUpdate = 0;
+
+        for (let i = 0; i < wireframeSettings.numPoints; i++) {
+            points.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * wireframeSettings.pointSpeed,
+                vy: (Math.random() - 0.5) * wireframeSettings.pointSpeed
+            });
+        }
+
+        function findConnections(points, threshold) {
+            const connections = [];
+
+            if (window.innerWidth > 1200 && wireframeSettings.useQuadTree) {
+
+                const gridSize = threshold;
+                const grid = {};
+
+                points.forEach((point, idx) => {
+                    const cellX = Math.floor(point.x / gridSize);
+                    const cellY = Math.floor(point.y / gridSize);
+                    const cellKey = `${cellX},${cellY}`;
+
+                    if (!grid[cellKey]) grid[cellKey] = [];
+                    grid[cellKey].push({ idx, point });
+                });
+
+                points.forEach((point1, i) => {
+                    const cellX = Math.floor(point1.x / gridSize);
+                    const cellY = Math.floor(point1.y / gridSize);
+
+                    for (let nx = cellX - 1; nx <= cellX + 1; nx++) {
+                        for (let ny = cellY - 1; ny <= cellY + 1; ny++) {
+                            const neighborCellKey = `${nx},${ny}`;
+                            const cellPoints = grid[neighborCellKey];
+
+                            if (cellPoints) {
+                                for (const { idx: j, point: point2 } of cellPoints) {
+                                    if (i < j) { 
+                                        const dx = point2.x - point1.x;
+                                        const dy = point2.y - point1.y;
+                                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                                        if (distance < threshold) {
+                                            connections.push({
+                                                from: i,
+                                                to: j,
+                                                distance: distance
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+
+                for (let i = 0; i < points.length; i++) {
+                    for (let j = i + 1; j < points.length; j++) {
+                        const dx = points[j].x - points[i].x;
+                        const dy = points[j].y - points[i].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < threshold) {
+                            connections.push({
+                                from: i,
+                                to: j,
+                                distance: distance
+                            });
+                        }
+                    }
+                }
+            }
+
+            return connections;
+        }
+
+        function drawWireframe(timestamp) {
+
+            if (!lastTime) {
+                lastTime = timestamp;
+                lastFpsUpdate = timestamp;
+            }
+
+            const elapsed = timestamp - lastTime;
+            lastTime = timestamp;
+
+            if (frameCount++ > 10) {
+                fps = 1000 / (timestamp - lastFpsUpdate) * frameCount;
+                lastFpsUpdate = timestamp;
+                frameCount = 0;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < points.length; i++) {
+                const point = points[i];
+
+                const delta = Math.min(elapsed, 32) / 16;
+                point.x += point.vx * delta;
+                point.y += point.vy * delta;
+
+                if (point.x <= 0 || point.x >= canvas.width) point.vx *= -1;
+                if (point.y <= 0 || point.y >= canvas.height) point.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, wireframeSettings.pointSize, 0, Math.PI * 2);
+                ctx.fillStyle = wireframeSettings.pointColor;
+                ctx.fill();
+            }
+
+            const connections = findConnections(points, wireframeSettings.connectionDistance);
+
+            for (const connection of connections) {
+                const p1 = points[connection.from];
+                const p2 = points[connection.to];
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                const opacity = 1 - (connection.distance / wireframeSettings.connectionDistance);
+                ctx.strokeStyle = wireframeSettings.lineColor.replace('0.8', opacity * 0.8);
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(drawWireframe);
+        }
+
+        requestAnimationFrame(drawWireframe);
+
+        window.addEventListener('resize', throttle(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }, 100));
+    }
+
+    function setupClickEffect() {
+        document.addEventListener('click', function(e) {
+
+            if (e.target.tagName === 'BUTTON') return;
+
+            const particles = document.getElementById('particles');
+
+            const mainParticle = document.createElement('div');
+            mainParticle.classList.add('particle');
+
+            const size = Math.min(window.innerWidth, window.innerHeight) * 0.08;
+            mainParticle.style.width = size + 'px';
+            mainParticle.style.height = size + 'px';
+            mainParticle.style.left = e.clientX + 'px';
+            mainParticle.style.top = e.clientY + 'px';
+
+            particles.appendChild(mainParticle);
+
+            mainParticle.animate([
+                {
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    opacity: 1
+                },
+                {
+                    transform: 'translate(-50%, -50%) scale(1.2)',
+                    opacity: 0
+                }
+            ], {
+                duration: 600,
+                easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
+            }).onfinish = () => mainParticle.remove();
+
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const particleSize = size * 0.2;
+                particle.style.width = particleSize + 'px';
+                particle.style.height = particleSize + 'px';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+
+                particles.appendChild(particle);
+
+                const angle = (i / 6) * Math.PI * 2;
+                const velocity = size * 0.12;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                particle.animate([
+                    {
+                        transform: 'translate(-50%, -50%) scale(1)',
+                        left: e.clientX + 'px',
+                        top: e.clientY + 'px',
+                        opacity: 1
+                    },
+                    {
+                        transform: 'translate(-50%, -50%) scale(0)',
+                        left: (e.clientX + vx) + 'px',
+                        top: (e.clientY + vy) + 'px',
+                        opacity: 0
+                    }
+                ], {
+                    duration: 400,
+                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                    fill: 'forwards'
+                }).onfinish = () => particle.remove();
+            }
+
+            const wave = document.createElement('div');
+            wave.classList.add('wave');
+
+            const waveSize = size * 1.5;
+            wave.style.width = waveSize + 'px';
+            wave.style.height = waveSize + 'px';
+            wave.style.left = e.clientX + 'px';
+            wave.style.top = e.clientY + 'px';
+
+            particles.appendChild(wave);
+
+            wave.animate([
+                {
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    opacity: 0.5
+                },
+                {
+                    transform: 'translate(-50%, -50%) scale(1)',
+                    opacity: 0
+                }
+            ], {
+                duration: 800,
+                easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
+            }).onfinish = () => wave.remove();
+        });
+    }
+
+    function createButtonEffect(e, type) {
+        const button = e.target;
+        const rect = button.getBoundingClientRect();
+        const particles = document.getElementById('particles');
+
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+        ripple.style.width = rect.width * 2.5 + 'px';
+        ripple.style.height = rect.width * 2.5 + 'px';
+        ripple.style.left = (rect.left + rect.width/2) + 'px';
+        ripple.style.top = (rect.top + rect.height/2) + 'px';
+
+        particles.appendChild(ripple);
+
+        ripple.animate([
+            { transform: 'translate(-50%, -50%) scale(0)', opacity: 0.5 },
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 0 }
+        ], {
+            duration: 800,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+        }).onfinish = () => ripple.remove();
+
+        const colors = type === 'save' ? ['#00e5ff', '#00a5ff', '#0077ff'] : ['#ff2a6d', '#00e5ff', '#05d9e8'];
+        const directions = type === 'save' ? 'inward' : 'outward';
+
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                const dataBurst = document.createElement('div');
+                dataBurst.classList.add('data-burst');
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = rect.width * (0.8 + Math.random() * 0.6);
+
+                let startX, startY, endX, endY;
+
+                if (directions === 'inward') {
+
+                    startX = rect.left + rect.width/2 + Math.cos(angle) * distance;
+                    startY = rect.top + rect.height/2 + Math.sin(angle) * distance;
+                    endX = rect.left + rect.width/2;
+                    endY = rect.top + rect.height/2;
+                } else {
+
+                    startX = rect.left + rect.width/2;
+                    startY = rect.top + rect.height/2;
+                    endX = rect.left + rect.width/2 + Math.cos(angle) * distance;
+                    endY = rect.top + rect.height/2 + Math.sin(angle) * distance;
+                }
+
+                dataBurst.style.left = startX + 'px';
+                dataBurst.style.top = startY + 'px';
+                dataBurst.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                particles.appendChild(dataBurst);
+
+                dataBurst.animate([
+                    { 
+                        left: startX + 'px', 
+                        top: startY + 'px',
+                        opacity: 1,
+                        width: '2px',
+                        height: '2px',
+                        boxShadow: '0 0 8px 2px ' + dataBurst.style.backgroundColor
+                    },
+                    { 
+                        left: endX + 'px', 
+                        top: endY + 'px',
+                        opacity: directions === 'inward' ? 0 : 0.8,
+                        width: directions === 'inward' ? '6px' : '1px',
+                        height: directions === 'inward' ? '6px' : '1px',
+                        boxShadow: '0 0 ' + (directions === 'inward' ? '15px 5px ' : '3px 1px ') + dataBurst.style.backgroundColor
+                    }
+                ], {
+                    duration: 500 + Math.random() * 500,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                }).onfinish = () => dataBurst.remove();
+            }, i * 20);
+        }
+
+        if (type === 'send') {
+            const circuit = document.createElement('div');
+            circuit.classList.add('digital-circuit');
+            circuit.style.left = rect.left + 'px';
+            circuit.style.top = rect.top + 'px';
+            circuit.style.width = rect.width + 'px';
+            circuit.style.height = rect.height + 'px';
+
+            particles.appendChild(circuit);
+
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const digitalParticle = document.createElement('div');
+                    digitalParticle.classList.add('digital-particle');
+
+                    let particleX, particleY;
+                    const side = Math.floor(Math.random() * 4);
+
+                    if (side === 0) { 
+                        particleX = rect.left + Math.random() * rect.width;
+                        particleY = rect.top;
+                    } else if (side === 1) { 
+                        particleX = rect.left + rect.width;
+                        particleY = rect.top + Math.random() * rect.height;
+                    } else if (side === 2) { 
+                        particleX = rect.left + Math.random() * rect.width;
+                        particleY = rect.top + rect.height;
+                    } else { 
+                        particleX = rect.left;
+                        particleY = rect.top + Math.random() * rect.height;
+                    }
+
+                    digitalParticle.style.left = particleX + 'px';
+                    digitalParticle.style.top = particleY + 'px';
+
+                    particles.appendChild(digitalParticle);
+
+                    let nextSide = (side + 1) % 4;
+                    let nextX, nextY;
+
+                    if (nextSide === 0) { 
+                        nextX = rect.left + Math.random() * rect.width;
+                        nextY = rect.top;
+                    } else if (nextSide === 1) { 
+                        nextX = rect.left + rect.width;
+                        nextY = rect.top + Math.random() * rect.height;
+                    } else if (nextSide === 2) { 
+                        nextX = rect.left + Math.random() * rect.width;
+                        nextY = rect.top + rect.height;
+                    } else { 
+                        nextX = rect.left;
+                        nextY = rect.top + Math.random() * rect.height;
+                    }
+
+                    digitalParticle.animate([
+                        { 
+                            left: particleX + 'px', 
+                            top: particleY + 'px',
+                            opacity: 1
+                        },
+                        { 
+                            left: nextX + 'px', 
+                            top: nextY + 'px',
+                            opacity: 0.7
+                        }
+                    ], {
+                        duration: 600 + Math.random() * 400,
+                        easing: 'linear'
+                    }).onfinish = () => digitalParticle.remove();
+
+                }, i * 40);
+            }
+
+            setTimeout(() => circuit.remove(), 1000);
+        }
+    }
+
+    function setupDataUpdate() {
+
+        setInterval(() => {
+            fetch('/data').then(res => res.text()).then(data => {
+                const signalElement = document.getElementById('signal');
+
+                if (data !== 'Ожидание сигнала...') {
+                    const waitingAnimation = signalElement.querySelector('.waiting-animation');
+                    if (waitingAnimation) {
+                        signalElement.innerHTML = data;
+                    }
+                }
+            });
+        }, 1000);
+    }
+
+    window.onload = function() {
+        setupWireframe();
+        setupClickEffect();
+        setupDataUpdate();
+        loadFiles();
+
+        document.querySelector('.waiting-dots').innerHTML = '';
+        setInterval(() => {
+            const dots = document.querySelector('.waiting-dots');
+            if (dots) {
+                if (dots.innerHTML === '') dots.innerHTML = '.';
+                else if (dots.innerHTML === '.') dots.innerHTML = '..';
+                else if (dots.innerHTML === '..') dots.innerHTML = '...';
+                else if (dots.innerHTML === '...') dots.innerHTML = '';
+            }
+        }, 400);
+    };
+
+    let pressTimer;
+let isPressed = false;
+let pressLocation = { x: 0, y: 0 };
+
+function showSecretLink() {
+    const link = document.createElement('a');
+    link.href = atob("aHR0cHM6Ly90Lm1lL201c3RpY2tfbG9uaTI=");
+    link.target = '_blank';
+    link.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(0,40,70,0.8));
+        border: 1px solid rgba(0,229,255,0.3);
+        border-radius: 10px;
+        color: #00e5ff;
+        text-decoration: none;
+        font-size: 16px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 20px rgba(0,229,255,0.2);
+        transform: translateY(100%);
+        animation: slideUp 0.5s forwards;
+        z-index: 99999;
+    `;
+
+    link.innerHTML = atob("8J+MjCBTZWNyZXQgQ2hhbm5l");
+    document.body.appendChild(link);
+
+    createRevealEffect(link);
+
+    setTimeout(() => {
+        link.style.animation = 'slideDown 0.5s forwards';
+        setTimeout(() => link.remove(), 500);
+    }, 5000);
+}
+
+function createRevealEffect(element) {
+    const particles = document.createElement('div');
+    particles.style.cssText = `
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+    `;
+    document.body.appendChild(particles);
+
+    for(let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        particle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: #00e5ff;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        `;
+
+        const rect = element.getBoundingClientRect();
+        const angle = (Math.random() * Math.PI * 2);
+        const velocity = 2 + Math.random() * 4;
+        const startX = rect.left + rect.width/2;
+        const startY = rect.top + rect.height/2;
+
+        particle.style.left = startX + 'px';
+        particle.style.top = startY + 'px';
+
+        particles.appendChild(particle);
+
+        particle.animate([
+            {
+                transform: 'scale(1)',
+                opacity: 1,
+                offset: 0
+            },
+            {
+                transform: `translate(${Math.cos(angle) * velocity * 50}px, ${Math.sin(angle) * velocity * 50}px) scale(0)`,
+                opacity: 0,
+                offset: 1
+            }
+        ], {
+            duration: 1000 + Math.random() * 1000,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+        });
+    }
+
+    setTimeout(() => particles.remove(), 2000);
+}
+
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideUp {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
+
+document.querySelector('.title').addEventListener('touchstart', (e) => {
+    isPressed = true;
+    const touch = e.touches[0];
+    pressLocation.x = touch.clientX;
+    pressLocation.y = touch.clientY;
+
+    pressTimer = setTimeout(() => {
+        if(isPressed) {
+            showSecretLink();
+        }
+    }, 4000);
+}, { passive: true });
+
+document.querySelector('.title').addEventListener('touchmove', (e) => {
+    if(!isPressed) return;
+
+    const touch = e.touches[0];
+    const moveThreshold = 20;
+
+    if(Math.abs(touch.clientX - pressLocation.x) > moveThreshold || 
+       Math.abs(touch.clientY - pressLocation.y) > moveThreshold) {
+        isPressed = false;
+        clearTimeout(pressTimer);
+    }
+}, { passive: true });
+
+document.querySelector('.title').addEventListener('touchend', () => {
+    isPressed = false;
+    clearTimeout(pressTimer);
+}, { passive: true });
+
+document.querySelector('.title').addEventListener('mousedown', (e) => {
+    isPressed = true;
+    pressLocation.x = e.clientX;
+    pressLocation.y = e.clientY;
+
+    pressTimer = setTimeout(() => {
+        if(isPressed) {
+            showSecretLink();
+        }
+    }, 4000);
+});
+
+document.querySelector('.title').addEventListener('mousemove', (e) => {
+    if(!isPressed) return;
+
+    const moveThreshold = 20;
+    if(Math.abs(e.clientX - pressLocation.x) > moveThreshold || 
+       Math.abs(e.clientY - pressLocation.y) > moveThreshold) {
+        isPressed = false;
+        clearTimeout(pressTimer);
+    }
+});
+
+document.querySelector('.title').addEventListener('mouseup', () => {
+    isPressed = false;
+    clearTimeout(pressTimer);
+});
+</script>
+</body>
+</html>
